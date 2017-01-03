@@ -77,7 +77,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
         String message = extras.getString("message");
         if(message == null){
-            message = "<missing message content>"
+            message = "<missing message content>";
         }
 
         NotificationCompat.Builder mBuilder =
