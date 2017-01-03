@@ -75,22 +75,29 @@ public class GCMIntentService extends GCMBaseIntentService {
             }
         }
 
+        String message = extras.getString("message");
+        if(message == null){
+            message = "<missing message content>"
+        }
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setDefaults(defaults)
                         .setSmallIcon(context.getApplicationInfo().icon)
                         .setWhen(System.currentTimeMillis())
                         .setContentTitle(extras.getString("title"))
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                         .setTicker(extras.getString("title"))
                         .setContentIntent(contentIntent)
-                        .setAutoCancel(true);
+                        .setAutoCancel(true)
+                        .setContentText(message);
 
-        String message = extras.getString("message");
+        /*String message = extras.getString("message");
         if (message != null) {
             mBuilder.setContentText(message);
         } else {
             mBuilder.setContentText("<missing message content>");
-        }
+        }*/
 
         String msgcnt = extras.getString("msgcnt");
         if (msgcnt != null) {
