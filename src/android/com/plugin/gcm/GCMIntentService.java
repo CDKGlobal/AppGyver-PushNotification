@@ -65,7 +65,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         Intent notificationIntent = new Intent(this, PushHandlerActivity.class);
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         notificationIntent.putExtra("pushBundle", extras);
-        notificationIntent.putExtra(NOT_ID, notId);
+        notificationIntent.putExtra("NOT_ID", notId);
 
         int requestCode = new Random().nextInt();
         PendingIntent contentIntent = PendingIntent.getActivity(this, requestCode, notificationIntent,
