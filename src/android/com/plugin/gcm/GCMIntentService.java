@@ -17,7 +17,7 @@ import java.util.Random;
 @SuppressLint("NewApi")
 public class GCMIntentService extends GCMBaseIntentService {
 
-    public final int NOTIFICATION_ID = 1;
+    public int NOTIFICATION_ID = 1;
 
     private static String TAG = "PushPlugin-GCMIntentService";
 
