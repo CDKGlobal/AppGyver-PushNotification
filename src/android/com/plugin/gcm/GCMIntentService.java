@@ -17,7 +17,7 @@ import java.util.Random;
 @SuppressLint("NewApi")
 public class GCMIntentService extends GCMBaseIntentService {
 
-    public int NOTIFICATION_ID = 1;
+    public static int NOTIFICATION_ID = 1;
 
     private static String TAG = "PushPlugin-GCMIntentService";
 
@@ -60,12 +60,12 @@ public class GCMIntentService extends GCMBaseIntentService {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(
                 Context.NOTIFICATION_SERVICE);
         String appName = getAppName(this);
-        int notId = ++NOTIFICATION_ID;
+        NOTIFICATION_ID++;
 
         Intent notificationIntent = new Intent(this, PushHandlerActivity.class);
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         notificationIntent.putExtra("pushBundle", extras);
-        notificationIntent.putExtra("NOT_ID", notId);
+        notificationIntent.putExtra("NOT_ID", NOTIFICATION_ID);
 
         int requestCode = new Random().nextInt();
         PendingIntent contentIntent = PendingIntent.getActivity(this, requestCode, notificationIntent,
@@ -110,7 +110,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         }
 
         try {
-            notId = Integer.parseInt(extras.getString("notId"));
+            //notId = Integer.parseInt(extras.getString("notId"));
         } catch (NumberFormatException e) {
             Log.e(TAG,
                     "Number format exception - Error parsing Notification ID: " + e.getMessage());
@@ -118,7 +118,7 @@ public class GCMIntentService extends GCMBaseIntentService {
             Log.e(TAG, "Number format exception - Error parsing Notification ID" + e.getMessage());
         }
 
-        mNotificationManager.notify((String) appName, notId, mBuilder.build());
+        mNotificationManager.notify((String) appName, NOTIFICATION_ID, mBuilder.build());
 
     }
 
